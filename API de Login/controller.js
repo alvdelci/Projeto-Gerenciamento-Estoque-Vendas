@@ -3,21 +3,21 @@ const pass = "toor";
 
 module.exports = {
 
-    home(req, res){
-        res.send("Hello World");
-    },
-
     login(req, res){
-        let login = req.params.login;
-        let password = req.params.password;
+        let authent = false;
+        let login = req.body.login;
+        let password = req.body.password;
 
         if(login == log && password == pass){
             res.send("Usuário e senha conferem!");
+            authent = true;
         }else if(login == "" || password == ""){
-            res.redirect('/login');
+            res.redirect();
             res.send("Todos os campos devem ser preenchidos!");
         }else{
             res.send("Dados informados não conferem!");
         }
+
+        return authent;
     }
 }
