@@ -16,11 +16,11 @@ module.exports = {
             console.log("Usuário e senha conferem!");
             authent = true;
         }else if(login == "" || password == ""){
+            res.send("Todos os campos devem ser preenchidos!");
             console.log("Todos os campos devem ser preenchidos!");
-            res.redirect('/init');
         }else{
+            res.send("Todos os campos devem ser preenchidos!")
             console.log("Dados informados não conferem!");
-            res.redirect('/init');
         }
 
         return authent;
