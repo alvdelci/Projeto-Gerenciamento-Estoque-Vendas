@@ -1,4 +1,5 @@
 const connection = require('./db/connection');
+connection.sync();
 const produtos = require('./db/produtos');
 
 module.exports = {
@@ -23,18 +24,50 @@ module.exports = {
             console.log("Todos os campos devem ser preenchidos!");
             res.send("Todos os campos devem ser preenchidos!");
         }else{
-            connection.sync().then(() => {
-                produtos.create({
-                    nome: nome,
-                    descricao: descricao,
-                    codigo: codigo,
-                    valor: valor,
-                    quantidade: quantidade
-                });
-                res.send("Produto cadastrado!");
-                console.log("Produto cadastrado!");
+            let aux = false;
+            let newQuant = 0;
+            let codigoAtual = "";
+
+            produtos.findAll({
+                raw: true
+            }).then((productArray) => {
+                if(productArray.lenght != 0){
+                    productArray.forEach(produtos => {
+                        if(produtos.codigo == codigo){
+                            aux = true;
+                            codigoAtual = produtos.codigo;
+                            newQuant += parseInt(produtos.quantidade);
+                        }
+                    });
+                }
+                if(aux == true){
+                    newQuant += parseInt(quantidade);
+                    produtos.update({quantidade: newQuant}, {
+                        where: {
+                            codigo: codigoAtual
+                        }
+                    }).then(() => {
+                        console.log("Quantidade atualizada no estoque.");
+                    }).catch((err) => {
+                        console.log("Erro: " + err);
+                    });
+                    console.log("test -> " + newQuant);
+                    console.log("test2 -> " + quantidade);
+                    res.send("Produto já cadastrado. Quantidade atualizada!");
+                }
+                else{
+                    produtos.create({
+                        nome: nome,
+                        descricao: descricao,
+                        codigo: codigo,
+                        valor: valor,
+                        quantidade: quantidade
+                    });
+                        res.send("Produto cadastrado!");
+                        console.log("Produto cadastrado!");
+                }
             }).catch((err) => {
-                res.send("Falha ao cadastrar produto. Erro -> " + err);
+                res.send("Erro -> " + err);
             });
         }
     }
