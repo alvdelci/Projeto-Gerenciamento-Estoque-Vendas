@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+</head>
+<body>
+    <header>
+        <h1>Cadastro de produtos</h1>
+    </header>
+    <form action="/addproduto" method="POST">
+        <div id="add-box">
+            <label>Nome</label><br>
+            <input type="text" name="nome"><br>
+
+            <label>Descrição</label><br>
+            <input type="text" name="descricao"><br>
+
+            <label>Código</label><br>
+            <input type="text" name="codigo"><br>
+
+            <label>Preço</label><br>
+            <input type="number" step="0.01" name="valor"><br>
+
+            <label>Quantidade adicionada</label><br>
+            <input type="number" name="quantidade"><br>
+
+            <input id="submit" type="submit" value="Cadastrar">
+        </div>
+    </form>
+</body>
+<style>
+    html{
+        height: 100%;
+    }
+    body{
+        height: 100%;
+        background-image: linear-gradient(#0e5755, #1e9199);
+    }
+    header{
+        text-align: center;
+        color: aliceblue;
+        text-shadow: 0, 0, 0, 1px #000;
+    }
+    input{
+        border-color: #1e9199;
+        outline-color: #0e5755;
+        width: 25vw;
+        border-radius: 5px;
+    }
+    label{
+        font-weight: bold;
+    }
+    #add-box{
+        border: solid 5px rgba(13, 66, 65, 0.9);
+        width: 30vw;
+        margin: auto;
+        align-self: center;
+        display: table;
+        background-color: #e3ecec;
+        padding: 25px;
+        border-radius: 15px;
+    }
+    #submit{
+        background-image: linear-gradient(rgba(13, 66, 65, 0.9), rgba(36, 173, 171, 0.9));
+        color: white;
+        font-size: 16px;
+        width: 10vw;
+        margin-left: 8vw;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    #submit:hover{
+        background-image: linear-gradient(rgba(36, 173, 171, 0.9), rgba(13, 66, 65, 0.9));
+    }
+</style>
+</html>

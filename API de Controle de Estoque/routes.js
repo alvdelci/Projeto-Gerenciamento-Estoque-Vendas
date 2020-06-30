@@ -4,6 +4,7 @@ const routes = express.Router();
 
 
 routes.get('/home', controller.home);
-routes.get('/addproduto/:nome/:descricao/:codigo/:valor/:quantidade', controller.addproduto);
+routes.get('/add', controller.add);
+routes.post('/addproduto', controller.addproduto);
 
 module.exports = routes;
