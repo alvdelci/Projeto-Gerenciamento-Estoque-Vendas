@@ -4,12 +4,8 @@ const produtos = require('./db/produtos');
 
 module.exports = {
 
-    home(req, res){
-        res.send({msg:'API de gerenciamento de estoque -> funcionando'});
-    },
-
     add(req, res){
-        res.sendFile(__dirname + '/view/index.html')
+        res.sendFile(__dirname + '/view/indexAdd.html')
     },
 
     addproduto(req, res){
@@ -18,8 +14,8 @@ module.exports = {
         let codigo = req.body.codigo;
         let valor = req.body.valor;
         let quantidade = req.body.quantidade;
-
-
+    
+    
         if (nome == "" || codigo == "" || valor == "" || quantidade == ""){
             console.log("Todos os campos devem ser preenchidos!");
             res.send("Todos os campos devem ser preenchidos!");
@@ -27,7 +23,7 @@ module.exports = {
             let aux = false;
             let newQuant = 0;
             let codigoAtual = "";
-
+    
             produtos.findAll({
                 raw: true
             }).then((productArray) => {
@@ -70,6 +66,53 @@ module.exports = {
                 res.send("Erro -> " + err);
             });
         }
+    },
+
+    update(req, res){
+        res.sendFile(__dirname + '/view/update.html');
+    },
+
+    updateproduto(req, res){
+        let search = req.body.search;
+        let nome = req.body.nome;
+        let descricao = req.body.descricao;
+        let valor = req.body.valor;
+        let quantidade = req.body.quantidade;
+
+        produtos.findAll({
+            where: {
+                codigo: search
+            }
+        }).then((results) => {
+            if(search == ""){
+                res.send("Insira o código de um produto!");
+            }else if(results == ""){
+                res.send("Código de produto não cadastrado! Insira um código válido!");
+            }else{
+                if(nome == "" || descricao == "" || valor == "" || quantidade == ""){
+                    res.send("Preencha todos os campos!");
+                }else{
+                    produtos.update({
+                        nome: nome,
+                        descricao: descricao,
+                        valor: valor,
+                        quantidade: quantidade
+                    }, 
+                    {
+                        where: {
+                            codigo: search
+                        }
+                    }).then(() => {
+                        res.send("Informações atualizadas com sucesso!");
+                    }).catch((err) => {
+                        res.send("Erro ao atualizar. Erro: " + err);
+                    });
+                    
+                }
+            }
+        }).catch((err) => {
+            res.send("Erro -> " + err);
+        });
     }
 
 }

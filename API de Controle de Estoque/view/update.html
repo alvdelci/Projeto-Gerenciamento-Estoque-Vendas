@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estoque</title>
+    <title>Estoque - Cadastro de Produtos</title>
 </head>
 <body>
     <header>
-        <h1>Cadastro de produtos</h1>
+        <h1>Atualização de Produto</h1>
     </header>
-    <form action="/addproduto" method="POST">
+    <form action="/updateproduto" method="POST">
         <div id="add-box">
-            <label>Nome</label><br>
+            <div style="text-align: center;">
+                <h4 style="margin-bottom: 0;">Informe o código do produto que deseja alterar</h4><br>
+                <input style="text-align: center;" type="text" name="search"><br>
+            </div><br><br>
+
+            <h4>Insira as novas informações do produto.</h4>
+            <label>Novo Nome</label><br>
             <input type="text" name="nome"><br>
 
-            <label>Descrição</label><br>
+            <label>Nova Descrição</label><br>
             <input type="text" name="descricao"><br>
 
-            <label>Código</label><br>
-            <input type="text" name="codigo"><br>
-
-            <label>Preço</label><br>
+            <label>Novo Preço</label><br>
             <input type="number" step="0.01" name="valor"><br>
 
-            <label>Quantidade adicionada</label><br>
+            <label>Nova Quantidade</label><br>
             <input type="number" name="quantidade"><br>
 
-            <input id="submit" type="submit" value="Cadastrar">
+            <input id="submit" type="submit" value="Atualizar">
         </div>
     </form>
 </body>
@@ -51,6 +54,11 @@
     }
     label{
         font-weight: bold;
+    }
+    h4{
+        text-align: center;
+        margin-top: 0;
+        text-decoration: underline;
     }
     #add-box{
         border: solid 5px rgba(13, 66, 65, 0.9);
