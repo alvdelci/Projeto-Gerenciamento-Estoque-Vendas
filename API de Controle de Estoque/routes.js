@@ -8,5 +8,8 @@ routes.post('/addproduto', controller.addproduto);
 //Atualizar produto
 routes.get('/update', controller.update);
 routes.post('/updateproduto', controller.updateproduto);
+//Remover produto
+routes.get('/remove', controller.remove);
+routes.post('/removeproduto', controller.removeproduto);
 
 module.exports = routes;

@@ -5,7 +5,7 @@ const produtos = require('./db/produtos');
 module.exports = {
 
     add(req, res){
-        res.sendFile(__dirname + '/view/indexAdd.html')
+        res.sendFile(__dirname + '/view/add.html');
     },
 
     addproduto(req, res){
@@ -112,6 +112,32 @@ module.exports = {
             }
         }).catch((err) => {
             res.send("Erro -> " + err);
+        });
+    },
+
+    remove(req, res){
+        res.sendFile(__dirname + '/view/remove.html');
+    },
+
+    removeproduto(req, res){
+        let codRemove = req.body.search;
+
+        produtos.findOne({
+            where: {codigo: codRemove}
+        }).then((results) => {
+            if(results == null){
+                res.send("Código de produto não encontrado.");
+            }else{
+                produtos.destroy({
+                    where: {codigo:codRemove}
+                }).then(() => {
+                    res.send("Produto removido");
+                }).catch((err) => {
+                    res.send("Falha ao remover produto. Erro: " + err);
+                });
+            }
+        }).catch((err) => {
+            console.log("Erro: " + err);
         });
     }
 
