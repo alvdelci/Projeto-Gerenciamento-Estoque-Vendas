@@ -147,11 +147,11 @@ module.exports = {
     view(req, res){
         res.sendFile(__dirname + '/view/view.html');
     },
-
+    //Funções para visualização de informações de produtos. Retorna um json com as informações referentes do produto que foi pesquisado pelo nome
     viewproduto(req, res){
         let nome = req.body.nome;
-
-        produtos.findOne({
+        //Busca 
+        produtos.findAll({
             where: {nome: nome}
         }).then((results) => {
             if(results == null){
