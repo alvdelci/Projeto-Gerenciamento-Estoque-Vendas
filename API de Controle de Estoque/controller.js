@@ -3,6 +3,10 @@ connection.sync();
 const produtos = require('./db/produtos');
 
 module.exports = {
+    //Exibe a tela inicial com menu de opções que redireciona para as telas de ações do estoque
+    home(req, res){
+        res.sendFile(__dirname + '/view/home.html');
+    },
     //Exibe a tela de cadastro de novos produtos
     add(req, res){
         res.sendFile(__dirname + '/view/add.html');

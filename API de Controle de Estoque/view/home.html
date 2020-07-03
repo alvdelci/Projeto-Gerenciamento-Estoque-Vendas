@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+</head>
+<body>
+    <header>
+        <h2>Estoque</h2>
+    </header>
+    <div id="form-box">
+        <form action="/add" method="GET">
+            <label>Adicionar produtos</label><br>
+            <input type="submit" value="Entrar">
+        </form>
+        <form action="/update" method="GET">
+            <label>Atualizar produtos</label><br>
+            <input type="submit" value="Entrar">
+        </form>
+        <form action="/remove" method="GET">
+            <label>Remover produtos</label><br>
+            <input type="submit" value="Entrar">
+        </form>
+        <form action="/view" method="GET">
+            <label>Buscar produtos</label><br>
+            <input type="submit" value="Entrar">
+        </form>
+    </div>
+</body>
+<style>
+    html{
+        height: 100%;
+    }
+    body{
+        background-image: linear-gradient(#0e5755, #1e9199);
+        text-align: center;
+    }
+    h2{
+        text-align: center;
+        color: white;
+        margin-bottom: 100px;
+    }
+    form{
+        width: 15vw;
+        text-align: center;
+        background-image: linear-gradient(#1e9199, #0e5755);
+        padding: 20px;
+        margin: 15px;
+        border-radius: 10px;
+        font-size: 20px;
+        color: white;
+        border: solid 1px #0e5755;
+    }
+    input{
+        width: 5vw;
+        height: 5vh;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+        border-color: #0e5755;
+        background-image: linear-gradient(#0e5755, #1e9199);
+        color: white;
+        font-weight: bold;
+    }
+    input:hover{
+        background-image: linear-gradient(#1e9199, #0e5755);
+    }
+    #form-box{
+        display: inline-flex;
+        justify-content: center;
+        background-color: white;
+        border-radius: 10px;
+        border-color: #0e5755;  
+    }
+</style>
+</html>
