@@ -142,6 +142,26 @@ module.exports = {
         }).catch((err) => {
             console.log("Erro: " + err);
         });
+    },
+    //Exibe a tela de busca por produtos
+    view(req, res){
+        res.sendFile(__dirname + '/view/view.html');
+    },
+
+    viewproduto(req, res){
+        let nome = req.body.nome;
+
+        produtos.findOne({
+            where: {nome: nome}
+        }).then((results) => {
+            if(results == null){
+                res.send("Produto não encontrado!");
+            }else{
+                res.send(results);
+            }
+        }).catch((err) => {
+            res.send("Erro: " + err);
+        });
     }
 
 }

@@ -11,5 +11,8 @@ routes.post('/updateproduto', controller.updateproduto);
 //Remover produto
 routes.get('/remove', controller.remove);
 routes.post('/removeproduto', controller.removeproduto);
+//Visualizar produtos
+routes.get('/view', controller.view);
+routes.post('/viewproduto', controller.viewproduto);
 
 module.exports = routes;
