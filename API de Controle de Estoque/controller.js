@@ -1,5 +1,5 @@
 const connection = require('./db/connection');
-connection.sync();
+connection.sync();//Cria as tabelas automaticamente assim que o sistema é inicializado. Isso para que as funções de consultas possam ser executadas
 const produtos = require('./db/produtos');
 
 module.exports = {
