@@ -25,8 +25,6 @@ module.exports = {
             res.send("Todos os campos devem ser preenchidos!");
         }else{
             let aux = false;
-            let newQuant = 0;
-            let codigoAtual = "";
             //Busca todos os produtos cadastrados
             produtos.findAll({
                 raw: true
@@ -34,26 +32,12 @@ module.exports = {
                 if(productArray.lenght != 0){           //Se houver produtos cadastrados
                     productArray.forEach(produtos => {  //Toda a array será percorrida afim de coletar algumas informações:
                         if(produtos.codigo == codigo){
-                            aux = true;                     //Se o código do produto Estiver cadastrado
-                            codigoAtual = produtos.codigo;  //Esse código será armazenado
-                            newQuant += parseInt(produtos.quantidade); //E a quantidade cadastrada no estoque será somada a nova quantidade.
+                            aux = true;
                         }
                     });
                 }
                 if(aux == true){
-                    newQuant += parseInt(quantidade);
-                    produtos.update({quantidade: newQuant}, {//É feito o update apenas da quantidade, as outras informações do produto são mantidas
-                        where: {
-                            codigo: codigoAtual
-                        }
-                    }).then(() => {
-                        console.log("Quantidade atualizada no estoque.");
-                    }).catch((err) => {
-                        console.log("Erro: " + err);
-                    });
-                    console.log("test -> " + newQuant);
-                    console.log("test2 -> " + quantidade);
-                    res.send("Produto já cadastrado. Quantidade atualizada!");
+                    res.send("Código ja cadastrado. Se deseja adicionar produtos ao estoque acesse as *Atualizar produtos*");
                 }
                 else{ //Se o código do produto ainda não estiver cadastrado, o novo produto será adicionada
                     produtos.create({
@@ -75,13 +59,127 @@ module.exports = {
     update(req, res){
         res.sendFile(__dirname + '/view/update.html');
     },
-    //Funções de atualização de informações do produto. Atualiza todas as informações de uma vez. Tendo como entrada o código do produto e as novas informações
-    updateproduto(req, res){
+    //Atualiza o nome do produto
+    updatenome(req, res){
         //Dados de entrada obtidos atraves do formulario html
         let search = req.body.search; //Código do produto que será atualizado
         let nome = req.body.nome;
+        
+        //busca por todos os produtos cadastrados cujo código é o mesmo que o informado no formulario html
+        produtos.findAll({
+            where: {
+                codigo: search
+            }
+        }).then((results) => {
+            if(search == ""){
+                res.send("Insira o código de um produto!");
+            }else if(results == ""){
+                res.send("Código de produto não cadastrado! Insira um código válido!");
+            }else{
+                if(nome == ""){
+                    res.send("Preencha todos os campos!");
+                }else{
+                    produtos.update({//Faz update de todas as informações do produto, exceto o código
+                        nome: nome,
+                    }, 
+                    {
+                        where: {
+                            codigo: search
+                        }
+                    }).then(() => {
+                        res.send("Informações atualizadas com sucesso!");
+                    }).catch((err) => {
+                        res.send("Erro ao atualizar. Erro: " + err);
+                    });
+                    
+                }
+            }
+        }).catch((err) => {
+            res.send("Erro -> " + err);
+        });
+    },
+    //Atualiza a descrição do produto
+    updatedescricao(req, res){
+        //Dados de entrada obtidos atraves do formulario html
+        let search = req.body.search; //Código do produto que será atualizado
         let descricao = req.body.descricao;
+        
+        //busca por todos os produtos cadastrados cujo código é o mesmo que o informado no formulario html
+        produtos.findAll({
+            where: {
+                codigo: search
+            }
+        }).then((results) => {
+            if(search == ""){
+                res.send("Insira o código de um produto!");
+            }else if(results == ""){
+                res.send("Código de produto não cadastrado! Insira um código válido!");
+            }else{
+                if(descricao == ""){
+                    res.send("Preencha todos os campos!");
+                }else{
+                    produtos.update({//Faz update de todas as informações do produto, exceto o código
+                        descricao: descricao,
+                    }, 
+                    {
+                        where: {
+                            codigo: search
+                        }
+                    }).then(() => {
+                        res.send("Informações atualizadas com sucesso!");
+                    }).catch((err) => {
+                        res.send("Erro ao atualizar. Erro: " + err);
+                    });
+                    
+                }
+            }
+        }).catch((err) => {
+            res.send("Erro -> " + err);
+        });
+    },
+    //Atualiza o preço do produto
+    updatevalor(req, res){
+        //Dados de entrada obtidos atraves do formulario html
+        let search = req.body.search; //Código do produto que será atualizado
         let valor = req.body.valor;
+        
+        //busca por todos os produtos cadastrados cujo código é o mesmo que o informado no formulario html
+        produtos.findAll({
+            where: {
+                codigo: search
+            }
+        }).then((results) => {
+            if(search == ""){
+                res.send("Insira o código de um produto!");
+            }else if(results == ""){
+                res.send("Código de produto não cadastrado! Insira um código válido!");
+            }else{
+                if(valor == ""){
+                    res.send("Preencha todos os campos!");
+                }else{
+                    produtos.update({//Faz update de todas as informações do produto, exceto o código
+                        valor: valor,
+                    }, 
+                    {
+                        where: {
+                            codigo: search
+                        }
+                    }).then(() => {
+                        res.send("Informações atualizadas com sucesso!");
+                    }).catch((err) => {
+                        res.send("Erro ao atualizar. Erro: " + err);
+                    });
+                    
+                }
+            }
+        }).catch((err) => {
+            res.send("Erro -> " + err);
+        });
+    },
+    //Atualiza a quantidade de produtos
+    updatequantidade(req, res){
+        //Dados de entrada obtidos atraves do formulario html
+        let search = req.body.search; //Código do produto que será atualizado
         let quantidade = req.body.quantidade;
         
         //busca por todos os produtos cadastrados cujo código é o mesmo que o informado no formulario html
@@ -95,14 +193,11 @@ module.exports = {
             }else if(results == ""){
                 res.send("Código de produto não cadastrado! Insira um código válido!");
             }else{
-                if(nome == "" || descricao == "" || valor == "" || quantidade == ""){
+                if(quantidade == ""){
                     res.send("Preencha todos os campos!");
                 }else{
                     produtos.update({//Faz update de todas as informações do produto, exceto o código
-                        nome: nome,
-                        descricao: descricao,
-                        valor: valor,
-                        quantidade: quantidade
+                        quantidade: quantidade,
                     }, 
                     {
                         where: {
