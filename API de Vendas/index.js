@@ -17,7 +17,6 @@ app.listen(3003, () => {
     console.log("Sistema online: Porta 3003...");
 });
 
-
 connection.authenticate().then(() => {
     console.log("Conexão com o banco de dados estabelecida!");
 }).catch((err) => {
