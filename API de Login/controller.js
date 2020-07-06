@@ -7,22 +7,18 @@ module.exports = {
         res.sendFile(__dirname + '/view/index.html');
     },
     login(req, res){
-        let authent = false;
         let login = req.body.login;
         let password = req.body.password;
 
         if(login == log && password == pass){
-            res.send("Usuário e senha conferem!");
-            console.log("Usuário e senha conferem!");
-            authent = true;
+            res.send({authent: true});
+            console.log("Dados conferem");
         }else if(login == "" || password == ""){
-            res.send("Todos os campos devem ser preenchidos!");
+            res.send({authent: "void"});
             console.log("Todos os campos devem ser preenchidos!");
         }else{
-            res.send("Todos os campos devem ser preenchidos!")
+            res.send({authent: false});
             console.log("Dados informados não conferem!");
         }
-
-        return authent;
     }
 }
