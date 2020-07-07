@@ -188,6 +188,8 @@ module.exports = {
                 codigo: search
             }
         }).then((results) => {
+            let newQuant = parseInt(quantidade) + parseInt(results[0].quantidade);
+            
             if(search == ""){
                 res.send("Insira o código de um produto!");
             }else if(results == ""){
@@ -197,7 +199,7 @@ module.exports = {
                     res.send("Preencha todos os campos!");
                 }else{
                     produtos.update({//Faz update de todas as informações do produto, exceto o código
-                        quantidade: quantidade,
+                        quantidade: newQuant,
                     }, 
                     {
                         where: {
