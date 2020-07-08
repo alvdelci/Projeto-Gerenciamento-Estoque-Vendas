@@ -13,7 +13,7 @@ function Login(){
         password: password
       }).then((body) => {
         if(body.data.authent === true){
-          alert("Adicionar a parte de redirecionamento!");
+          alert("Redirecionando...");
         }else if(body.data.authent === "void"){
           alert("Todos os campos devem ser preenchidos!");
         }else{
@@ -22,7 +22,7 @@ function Login(){
         setLogin(body.data.login);
         setPassword(body.data.password);
       }).catch((err) => {
-        console.log("Erro aqui: " + err);
+        console.log("Erro: " + err);
       });
     }
 
