@@ -1,0 +1,72 @@
+html {
+    height: 100%;
+  }
+  body {
+    min-height: 100%;
+  }
+.card-body{
+ border-radius:12px; 
+ width:400px;
+ margin: auto;
+ display:flex;
+ height:100%;
+ box-sizing: auto;
+}
+
+
+.input{
+width:200px;
+border-radius:12px;
+margin:auto;
+}
+.jum{
+margin: auto;
+height:fit-content;    
+}
+.cont{
+height: 100%;
+box-sizing:border-box;
+}
+
+.button{
+ border-radius:12px;
+ 
+    
+}
+.footer{
+margin:auto;
+height:3vw;
+box-sizing: border-box;
+}
+
+.home{
+margin: auto; 
+}
+
+.Badge{
+ margin:auto;; 
+}
+
+.title{
+margin:auto;  
+}
+
+.card-columns{
+margin: auto;
+padding: 2%;  
+}
+
+.bread{
+ margin:auto;
+ text-align: center; 
+}
+
+
+.baixo{
+ margin-top:6vw; 
+}
+
+
+.options{
+border-radius: 12px;  
+}
