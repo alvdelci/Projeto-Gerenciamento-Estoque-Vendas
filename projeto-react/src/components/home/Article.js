@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron, Container, Card, CardText, CardTitle, Button, Col, Row } from 'reactstrap';
-
+import {Link} from 'react-router-dom'
 import '../../App.css';
 
 
@@ -24,7 +24,9 @@ const Article = (props) => {
                             <img top width="100%" src="/assets/remover.jpg" alt="Card image cap" />
                             <CardTitle>Remover Produtos</CardTitle>
                             <CardText>Remova Produtos do seu estoque</CardText>
-                            <Button link href="/removeproduto" className="button">Acessar</Button>
+                            <Link to="/remove">
+                              <Button className="button">Acessar</Button>
+                            </Link>
                         </Card>
                     </Col>
                     <Col className="baixo" sm="6">

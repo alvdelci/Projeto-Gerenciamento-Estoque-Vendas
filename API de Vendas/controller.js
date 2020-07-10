@@ -55,5 +55,19 @@ module.exports = {
       }) .catch((err) => {
           res.send("Erro: " + err);
       });
+  },
+
+  exibir(req, res){
+
+    //Busca os dados de 
+    produtos.findAll({
+      attributes: ['nome','descricao', 'codigo', 'valor'] //É apenas exibido essas colunas
+
+    }).then((results) => {
+      res.send(results);
+
+    }).catch((err) => {
+        res.send("Erro: " + err);
+    });
   }
 }

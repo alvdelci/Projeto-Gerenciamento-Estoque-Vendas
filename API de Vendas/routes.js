@@ -5,5 +5,6 @@ const routes = express.Router();
 
 routes.get('/vendas', controller.vendas);
 routes.post('/comprar', controller.comprar);
+routes.post('/exibir', controller.exibir);
 
 module.exports = routes;
