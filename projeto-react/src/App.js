@@ -4,9 +4,12 @@ import './App.css';
 /*import Headers from './components/home/Header';
 import Article from './components/home/Article';
 import Footer from './components/home/Footer';*/
-import Headers from './components/login/Header';
+/*import Headers from './components/login/Header';
 import Article from './components/login/Article';
-import Footer from './components/login/Footer';
+import Footer from './components/login/Footer';*/
+import Headers from './components/actions/remove/Header';
+import Article from './components/actions/remove/Article';
+import Footer from './components/actions/remove/Footer';
 
 
 function App() {
@@ -17,7 +20,12 @@ function App() {
       <Article />
       <Footer />
     </>
-    //<Vendas/> //teça de vendas
+    /*<>//Tela de remove
+      <Headers />
+      <Article />
+      <Footer />
+    </>*/
+    //<Vendas/> //tela de vendas
     /*<> //Tela de home
     <Headers/>
     <Article/>

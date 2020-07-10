@@ -10,7 +10,7 @@ const Article = (props) => {
   let [login, setLogin] = useState("");
   let [password, setPassword] = useState("");
 
-  async function validar() {
+  async function validar() { 
     await axios.post(`http://localhost:3001/login`, {
       login: login,
       password: password
@@ -29,18 +29,18 @@ const Article = (props) => {
     });
   }
   return (
-    <div>
+    <>
       <Jumbotron fluid className="jum bg-dark ">
         <Container fluid className="cont">
           <div>
             <CardBody className="card-body bg-info">
               <Form className="form" type="card">
                 <FormGroup>
-                  <Label for="exampleEmail">Usuário:</Label>
+                  <Label>Usuário:</Label>
                   <Input className="input" type="text" name="login" value={login} onChange={(e) => { setLogin(e.target.value) }} placeholder="Insira o usuário" />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="examplePassword">Senha:</Label>
+                  <Label>Senha:</Label>
                   <Input className="input" type="password" name="password" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder="insira a senha" />
                 </FormGroup>
                 <Button className="button" onClick={validar}>Entrar</Button>
@@ -49,7 +49,7 @@ const Article = (props) => {
           </div>
         </Container>
       </Jumbotron>
-    </div>
+    </>
   );
 };
 
