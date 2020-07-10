@@ -230,7 +230,7 @@ module.exports = {
             where: {codigo: codRemove}
         }).then((results) => {
             if(results == null){
-                res.send("Código de produto não encontrado.");
+                res.send({found: false});
             }else{
                 produtos.destroy({ //Remove todas as informações do produto cujo código é o mesmo que o informado para remoção
                     where: {codigo:codRemove}
