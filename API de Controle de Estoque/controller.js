@@ -37,7 +37,7 @@ module.exports = {
                     });
                 }
                 if(aux == true){
-                    res.send("Código ja cadastrado. Se deseja adicionar produtos ao estoque acesse as *Atualizar produtos*");
+                    res.send({exists: true}) ;
                 }
                 else{ //Se o código do produto ainda não estiver cadastrado, o novo produto será adicionada
                     produtos.create({
@@ -256,7 +256,7 @@ module.exports = {
             where: {nome: nome}
         }).then((results) => {
             if(results == null){
-                res.send("Produto não encontrado!");
+                res.send({found: false});
             }else{
                 res.send(results);
             }

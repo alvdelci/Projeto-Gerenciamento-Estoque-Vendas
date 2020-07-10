@@ -24,8 +24,8 @@ const Article = (props) => {
       } else if(body.data.authent === false) {
         alert("Credenciais incorretas!");
       }
-      setLogin(body.data.login);
-      setPassword(body.data.password);
+      setLogin(login);
+      setPassword(password);
     }).catch((err) => {
       console.log("Erro: " + err);
     });
