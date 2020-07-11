@@ -32,7 +32,7 @@ module.exports = {
           res.send({authent: false})
           console.log("Só é possível comprar no máximo 10 produtos por vez.")
         }
-        else if (produto == "") {//Validação do código requisitado pelo usuário
+        else if (produto == null) {//Validação do código requisitado pelo usuário
           res.send({found: false})
           console.log("Dados não conferem.")
         }
