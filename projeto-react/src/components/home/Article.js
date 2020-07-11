@@ -8,7 +8,6 @@ const Article = (props) => {
     return (
         <div className="corpo ">
             <Jumbotron fluid className="jum bg-dark">
-
                 <Container>
                     <Row>
                         <Col sm="6">
@@ -36,8 +35,8 @@ const Article = (props) => {
                                 <img top width="100%" src="/assets/atualizar.jpeg" alt="Card image cap" />
                                 <CardTitle>Atualizar Produtos</CardTitle>
                                 <CardText>Atualize os produtos do seus estoque</CardText>
-                                <Link to="">
-                                    <Button className="button" >Acessar</Button>
+                                <Link to="/update">
+                                    <Button className="button">Acessar</Button>
                                 </Link>
                             </Card>
                         </Col>
@@ -47,7 +46,7 @@ const Article = (props) => {
                                 <CardTitle>Buscar Produtos</CardTitle>
                                 <CardText>Pesquise algum produto no estoque</CardText>
                                 <Link to="/view">
-                                    <Button className="button" >Acessar</Button>
+                                    <Button className="button">Acessar</Button>
                                 </Link>
                             </Card>
                         </Col>

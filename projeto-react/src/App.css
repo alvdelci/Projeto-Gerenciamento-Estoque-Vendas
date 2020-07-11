@@ -21,7 +21,6 @@ margin:auto;
 }
 .jum{
 margin: auto;
-height:fit-content;
 }
 .cont{
 height: 100%;
@@ -38,6 +37,8 @@ box-sizing:border-box;
 margin:auto;
 height:3vw;
 box-sizing: border-box;
+position: absolute;
+bottom: 0;
 }
 
 .home{

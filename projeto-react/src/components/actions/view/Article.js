@@ -3,16 +3,13 @@ import { useState } from 'react';
 import { Card, CardText, CardTitle, Button, Form, FormGroup, Label, Input, Jumbotron, Container, Col, Row } from 'reactstrap';
 import axios from 'axios';
 
-import '../../../App.css';
+import './App.css';
 
 
-function Article () {
+function Article() {
   let [search, setSearch] = useState("");
   let [nome, setNome] = useState("");
-  let [descricao, setDescricao] = useState("");
-  let [codigo, setCodigo] = useState("");
-  let [valor, setValor] = useState("");
-  let [quantidade, setQuantidade] = useState("");
+  let [repos, setRepos] = useState([]);
 
   async function buscar() {
     await axios.post(`http://localhost:3002/viewproduto`, {
@@ -24,12 +21,11 @@ function Article () {
       }
       else if (body.data.found === false) {
         alert("Produto não encontrado!");
+      } else {
+        setRepos(body.data);
       }
       setNome(body.data.nome);
-      setDescricao(body.data.descricao);
-      setCodigo(body.data.codigo);
-      setValor(body.data.valor);
-      setQuantidade(body.data.quantidade);
+
     });
   }
 
@@ -39,8 +35,8 @@ function Article () {
         <Container>
           <Row>
             <Col sm="6">
-              <Card body className="options bg-info col-" >
-                <CardTitle>Buscar produtos pelo Nome:</CardTitle>
+              <Card body className="options bg-info" >
+                <CardTitle>Buscar produtos pelo Nome</CardTitle>
                 <CardText>
                   <div>
                     <FormGroup>
@@ -52,34 +48,28 @@ function Article () {
               </Card>
             </Col>
             <Col sm="6">
-              <Card body className="options bg-info col-" >
-                <CardTitle>Resultado:</CardTitle>
-                <CardText>
-                  <div>
-                    <div>
-                      <Label>Nome</Label>
-                      <Input className="input"  name="name" value={nome} />
-                    </div>
-                    <div>
-                      <Label>Descrição:</Label>
-                      <Input className="input" disabled name="description" value={descricao} />
-                    </div>
-                    <div>
-                      <Label>Código:</Label>
-                      <Input className="input" disabled name="code" value={codigo} />
-                    </div>
-                    <div>
-                      <Label>Quantidade:</Label>
-                      <Input className="input" disabled name="quant" value={quantidade} />
-                    </div>
-                    <div>
-                      <Label>Valor:</Label>
-                      <Input className="input" disabled name="price" value={valor} />
-                    </div>
-                  </div>
-                </CardText>
-              </Card>
-            </Col>
+                <Card body className="options bg-info" >
+                  <CardTitle>Produtos</CardTitle>
+                  <CardText>
+                    <Form>
+                      <div clasName="Repo">
+                        {repos.map((element) => {
+                          return (
+                            <p key={element.id}>
+
+                              <h4>{element.nome}</h4>
+                              <li>Descrição: {element.descricao}</li>
+                              <li>Código: {element.codigo}</li>
+                              <li>Preço: R${element.valor}</li>
+                              <li>Estoque: {element.quantidade}</li>
+                            </p>
+                          )
+                        })}
+                      </div>
+                    </Form>
+                  </CardText>
+                </Card>
+              </Col>
           </Row>
         </Container>
       </Jumbotron>

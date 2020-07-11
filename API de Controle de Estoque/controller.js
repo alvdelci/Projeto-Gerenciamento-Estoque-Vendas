@@ -19,7 +19,7 @@ module.exports = {
         let codigo = req.body.codigo;
         let valor = req.body.valor;
         let quantidade = req.body.quantidade;
-    
+
         if (nome == "" || codigo == "" || valor == "" || quantidade == ""){
             console.log("Todos os campos devem ser preenchidos!");
             res.send("Todos os campos devem ser preenchidos!");
@@ -37,7 +37,7 @@ module.exports = {
                     });
                 }
                 if(aux == true){
-                    res.send({exists: true}) ;
+                    res.send("Código ja cadastrado. Se deseja adicionar produtos ao estoque acesse as *Atualizar produtos*");
                 }
                 else{ //Se o código do produto ainda não estiver cadastrado, o novo produto será adicionada
                     produtos.create({
@@ -64,7 +64,7 @@ module.exports = {
         //Dados de entrada obtidos atraves do formulario html
         let search = req.body.search; //Código do produto que será atualizado
         let nome = req.body.nome;
-        
+
         //busca por todos os produtos cadastrados cujo código é o mesmo que o informado no formulario html
         produtos.findAll({
             where: {
@@ -74,14 +74,14 @@ module.exports = {
             if(search == ""){
                 res.send("Insira o código de um produto!");
             }else if(results == ""){
-                res.send("Código de produto não cadastrado! Insira um código válido!");
+                res.send({found: false});//Resposta para comunicação com a APP do React
             }else{
                 if(nome == ""){
                     res.send("Preencha todos os campos!");
                 }else{
                     produtos.update({//Faz update de todas as informações do produto, exceto o código
                         nome: nome,
-                    }, 
+                    },
                     {
                         where: {
                             codigo: search
@@ -91,7 +91,7 @@ module.exports = {
                     }).catch((err) => {
                         res.send("Erro ao atualizar. Erro: " + err);
                     });
-                    
+
                 }
             }
         }).catch((err) => {
@@ -103,7 +103,7 @@ module.exports = {
         //Dados de entrada obtidos atraves do formulario html
         let search = req.body.search; //Código do produto que será atualizado
         let descricao = req.body.descricao;
-        
+
         //busca por todos os produtos cadastrados cujo código é o mesmo que o informado no formulario html
         produtos.findAll({
             where: {
@@ -113,14 +113,14 @@ module.exports = {
             if(search == ""){
                 res.send("Insira o código de um produto!");
             }else if(results == ""){
-                res.send("Código de produto não cadastrado! Insira um código válido!");
+                res.send({found: false});//Resposta para comunicação com a APP do React
             }else{
                 if(descricao == ""){
                     res.send("Preencha todos os campos!");
                 }else{
                     produtos.update({//Faz update de todas as informações do produto, exceto o código
                         descricao: descricao,
-                    }, 
+                    },
                     {
                         where: {
                             codigo: search
@@ -130,7 +130,7 @@ module.exports = {
                     }).catch((err) => {
                         res.send("Erro ao atualizar. Erro: " + err);
                     });
-                    
+
                 }
             }
         }).catch((err) => {
@@ -142,7 +142,7 @@ module.exports = {
         //Dados de entrada obtidos atraves do formulario html
         let search = req.body.search; //Código do produto que será atualizado
         let valor = req.body.valor;
-        
+
         //busca por todos os produtos cadastrados cujo código é o mesmo que o informado no formulario html
         produtos.findAll({
             where: {
@@ -152,14 +152,14 @@ module.exports = {
             if(search == ""){
                 res.send("Insira o código de um produto!");
             }else if(results == ""){
-                res.send("Código de produto não cadastrado! Insira um código válido!");
+                res.send({found: false});//Resposta para comunicação com a APP do React
             }else{
                 if(valor == ""){
                     res.send("Preencha todos os campos!");
                 }else{
                     produtos.update({//Faz update de todas as informações do produto, exceto o código
                         valor: valor,
-                    }, 
+                    },
                     {
                         where: {
                             codigo: search
@@ -169,7 +169,7 @@ module.exports = {
                     }).catch((err) => {
                         res.send("Erro ao atualizar. Erro: " + err);
                     });
-                    
+
                 }
             }
         }).catch((err) => {
@@ -181,26 +181,26 @@ module.exports = {
         //Dados de entrada obtidos atraves do formulario html
         let search = req.body.search; //Código do produto que será atualizado
         let quantidade = req.body.quantidade;
-        
+
         //busca por todos os produtos cadastrados cujo código é o mesmo que o informado no formulario html
         produtos.findAll({
             where: {
                 codigo: search
             }
         }).then((results) => {
-            let newQuant = parseInt(quantidade) + parseInt(results[0].quantidade);
-            
+
             if(search == ""){
                 res.send("Insira o código de um produto!");
             }else if(results == ""){
-                res.send("Código de produto não cadastrado! Insira um código válido!");
+                res.send({found: false});//Resposta para comunicação com a APP do React
             }else{
                 if(quantidade == ""){
                     res.send("Preencha todos os campos!");
                 }else{
+                  let newQuant = parseInt(quantidade) + parseInt(results[0].quantidade);
                     produtos.update({//Faz update de todas as informações do produto, exceto o código
                         quantidade: newQuant,
-                    }, 
+                    },
                     {
                         where: {
                             codigo: search
@@ -210,7 +210,7 @@ module.exports = {
                     }).catch((err) => {
                         res.send("Erro ao atualizar. Erro: " + err);
                     });
-                    
+
                 }
             }
         }).catch((err) => {
@@ -230,7 +230,7 @@ module.exports = {
             where: {codigo: codRemove}
         }).then((results) => {
             if(results == null){
-                res.send({found: false});
+                res.send({found: false});//Resposta para comunicação com a APP do React
             }else{
                 produtos.destroy({ //Remove todas as informações do produto cujo código é o mesmo que o informado para remoção
                     where: {codigo:codRemove}
@@ -251,12 +251,16 @@ module.exports = {
     //Funções para visualização de informações de produtos. Retorna um json com as informações referentes do produto que foi pesquisado pelo nome
     viewproduto(req, res){
         let nome = req.body.nome;
-        //Busca 
+        //Busca
         produtos.findAll({
             where: {nome: nome}
         }).then((results) => {
-            if(results == null){
+          if(nome == ""){
+              res.send("Insira o nome de um produto!");
+          }
+            else if(results == ""){
                 res.send({found: false});
+                console.log("Dados não conferem.")
             }else{
                 res.send(results);
             }

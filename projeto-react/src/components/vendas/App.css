@@ -1,0 +1,87 @@
+html {
+    height: 100%;
+  }
+  body {
+    min-height: 100%;
+  }
+  li {
+  list-style-type: none;
+  color: white;
+}
+  h4{
+    color: white;
+  }
+.titulo{
+ width:100%;
+}
+.card-body{
+ border-radius:12px;
+ width:400px;
+ margin: auto;
+ display:flex;
+ height:100%;
+ box-sizing: auto;
+}
+
+
+.input{
+width:18vw;
+border-radius:12px;
+}
+.jum{
+margin: auto;
+height:85vh;;
+width:100%
+}
+.cont{
+height: 100%;
+width:100%;
+box-sizing:border-box;
+}
+
+.button{
+ border-radius:12px;
+ width: 100%;
+margin: auto;
+position:center;
+}
+.footer{
+margin:auto;
+height:8vh;
+width:100%;
+box-sizing: border-box;
+position: absolute;
+}
+
+.home{
+margin: auto;
+}
+
+.Badge{
+ margin:auto;;
+}
+
+.title{
+margin:auto;
+}
+
+.card-columns{
+margin: auto;
+padding: 2%;
+}
+
+.bread{
+ margin:auto;
+ text-align: center;
+}
+
+
+.baixo{
+ margin-top:6vw;
+}
+
+
+.options{
+border-radius: 12px;
+height:fit-content;
+}

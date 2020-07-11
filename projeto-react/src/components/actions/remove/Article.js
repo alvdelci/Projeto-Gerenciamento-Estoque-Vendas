@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, FormGroup, Label, Input, CardBody, Button, Jumbotron, Container } from 'reactstrap';
 import { useState } from 'react';
 import axios from 'axios';
-import '../App.css';
+import './App.css';
 
 const Article = (props) => {
     let [codigo, setCodigo] = useState("");

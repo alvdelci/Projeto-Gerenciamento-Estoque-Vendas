@@ -18,11 +18,23 @@ module.exports = {
         where: {codigo: cod}
 
       }).then((produto) =>{
-        if (qusers == "" || qusers == 0 ) { //Validação da quantidade requisitada pelo usuário
-          res.send("Informe uma quantidade.")
+        if (qusers == "" && qusers == 0 && cod == "") {//Validação dos campos de quantidade e código
+          res.send("Informe um código e uma quantidade.")
+        }
+        else if (qusers == "" || qusers <= 0) { //Validação da quantidade requisitada pelo usuário
+          res.send({authent: "void"})
+          console.log("Informe uma quantidade.")
+        }
+        else if (cod == "") {//Validação do espaço do código
+          res.send("Informe um código.")
         }
         else if (qusers > 10 ) {//Restrição da quantidade na compra de 1 até 10 produtos.
-          res.send("Só é possível comprar no máximo 10 produtos por vez.")
+          res.send({authent: false})
+          console.log("Só é possível comprar no máximo 10 produtos por vez.")
+        }
+        else if (produto == "") {//Validação do código requisitado pelo usuário
+          res.send({found: false})
+          console.log("Dados não conferem.")
         }
         else {
 
@@ -32,10 +44,12 @@ module.exports = {
               const qfinal = qexist - qusers; //Diminui a quantidade existente no estoque pela quantidade requisitada pelo usuário
 
                 if (qexist == 0) { //Observa se no banco de dados ainda tem o produto
-                  res.send("Produto Esgotado.");
+                  res.send({authent: "empty"});
+                  console.log ("Produto Esgotado.")
                 }
                 else if (qfinal < 0) {
-                  res.send("Quantidade insuficiente no estoque, restam apenas "  + qexist + " produto(s)");
+                  res.send({authent: "insuficiente"})
+                  console.log("Quantidade insuficiente no estoque, restam apenas "  + qexist + " produto(s)");
                 }
                 else if (qfinal >= 0) {
                   produtos.update({//Faz update da quantidade final do produto no banco de dados
@@ -59,7 +73,7 @@ module.exports = {
 
   exibir(req, res){
 
-    //Busca os dados de 
+    //Busca os dados do banco de daods
     produtos.findAll({
       attributes: ['nome','descricao', 'codigo', 'valor'] //É apenas exibido essas colunas
 
@@ -70,4 +84,6 @@ module.exports = {
         res.send("Erro: " + err);
     });
   }
+
+
 }

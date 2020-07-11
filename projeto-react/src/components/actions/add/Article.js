@@ -3,7 +3,7 @@ import { CardBody, Button, Jumbotron, Container, Form, FormGroup, Label, Input }
 import { useState } from 'react';
 import axios from 'axios';
 
-import '../App.css';
+import './App.css';
 
 const Article = (props) => {
   let [ nome, setNome ] = useState("");
@@ -35,7 +35,7 @@ const Article = (props) => {
       else {
         alert("Produto cadastrado com sucesso!");
       }
-      
+
     });
   }
 

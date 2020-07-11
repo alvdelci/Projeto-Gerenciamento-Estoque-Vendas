@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = (props) => {
     return (
-        <footer borderless className="footer bg-info text-center" > © 2020 Copyright:
+        <footer className="footer bg-info navbar-fixed-bottom text-center" > © 2020 Copyright:
             <a className="empresa text-dark" href="https://recodejr.com/" >Trainee</a>
         </footer>
     );
